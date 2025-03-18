@@ -83,6 +83,34 @@ class LinkedList {
         return counter;
     }
 
+    public Node deletion(int position) {
+        int size = size(head);
+        if(size <= 0) {
+            System.out.println("there is nothing to delete");
+            return head;
+        }
+        if(position > size) {
+            System.out.println("invalid position for deletion");
+            return head;
+        }
+        // go for the deletion at the first position
+        if(position == 1){
+            head = head.getNext();
+            return head;
+        }
+
+        // delete at any other position
+        Node current = head;
+        int counter = 1;
+        while(counter < position - 1) {
+            current = current.getNext();
+            counter = counter + 1;
+        }
+        Node toDelete = current.getNext();
+        current.setNext(toDelete.getNext());
+        return head;
+    }
+
     public String toString(){
         StringBuffer sb = new StringBuffer();
         Node current = head;
@@ -90,7 +118,8 @@ class LinkedList {
             sb.append(current.getData()+" --> ");
             current = current.getNext();
         }
-        sb.replace(sb.length()-5, sb.length(), "");
+        if(sb.length() > 5)
+            sb.replace(sb.length()-5, sb.length(), "");
         return sb.toString();
     }
 
@@ -118,6 +147,42 @@ public class LinkedListTesting {
 
         Node n7 = new Node(42);
         ll.insertion(n7, 2);
+
         System.out.println(ll);
+
+        ll.deletion(7);
+        System.out.println(ll);
+
+        ll.deletion(3);
+        System.out.println(ll);
+
+        ll.deletion(1);
+        System.out.println(ll);
+
+        ll.deletion(1);
+        System.out.println(ll);
+        ll.deletion(1);
+        System.out.println(ll);
+        ll.deletion(1);
+        System.out.println(ll);
+
+        ll.deletion(1);
+        System.out.println(ll);
+
+        ll.deletion(1);
+        System.out.println(ll);
+
+        Node n11 = new Node(121);
+        ll.insertion(n11, 1);
+        System.out.println(ll);
+
+        Node n12 = new Node(122);
+        ll.insertion(n12, 1);
+        System.out.println(ll);
+
+        Node n13 = new Node(123);
+        ll.insertion(n13, 3);
+        System.out.println(ll);
+
     }
 }
